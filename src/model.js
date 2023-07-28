@@ -73,8 +73,8 @@ Animal.init(
 	}
 );
 
-Human.hasMany(Animal);
-Animal.belongsTo(Human);
+Human.hasMany(Animal, { foreignKey: { name: "humanId", field: "human_id" } });
+Animal.belongsTo(Human, { foreignKey: { name: "humanId", field: "human_id" } });
 
 await db.sync();
 
