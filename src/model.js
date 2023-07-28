@@ -10,11 +10,36 @@ export class Human extends Model {
   }
 
   getFullName() {
-    // TODO: Implement this method
+    return this.fname + " " + this.lname;
   }
 }
 
-// TODO: Human.init()
+Human.init(
+	{
+		humanId: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			autoIncrement: true,
+			primaryKey: true
+		},
+		fname: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		lname: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		email: {
+			type: DataTypes.STRING,
+			allowNull: false
+		}
+	},
+	{
+		sequelize: db,
+		modelName: "Human"
+	}
+);
 
 export class Animal extends Model {
   [util.inspect.custom]() {
@@ -22,9 +47,34 @@ export class Animal extends Model {
   }
 }
 
-// TODO: Animal.init()
+Animal.init(
+	{
+		animalId: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			autoIncrement: true,
+			primaryKey: true
+		},
+		name: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		species: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		birthYear: {
+			type: DataTypes.INTEGER
+		}
+	},
+	{
+		sequelize: db,
+		modelName: "Animal"
+	}
+);
 
-// TODO: Define Relationship
+Human.hasMany(Animal);
+Animal.belongsTo(Human);
 
 await db.sync();
 
