@@ -15,3 +15,8 @@ WHERE customer_id IN (
 	AND customers.lname = 'Crocker'
 );
 
+-- Problem 3
+
+SELECT SUM(num_cupcakes)
+FROM orders
+WHERE NOT processed;
