@@ -26,4 +26,6 @@ export class Animal extends Model {
 
 // TODO: Define Relationship
 
+await db.sync();
+
 export default db;
