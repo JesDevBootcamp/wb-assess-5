@@ -36,3 +36,18 @@ FROM customers
 JOIN orders ON customer_id = customers.id
 GROUP BY email
 ORDER BY sum DESC;
+
+-- Problem 6
+
+SELECT fname, lname, email
+FROM customers
+WHERE id IN (
+	SELECT customer_id
+	FROM orders
+	WHERE cupcake_id IN (
+		SELECT id
+		FROM cupcakes
+		WHERE name = 'funfetti'
+	)
+	AND processed
+);
