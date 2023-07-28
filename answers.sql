@@ -28,3 +28,11 @@ FROM cupcakes
 LEFT JOIN orders ON cupcake_id = cupcakes.id
 GROUP BY name
 ORDER BY name ASC;
+
+-- Problem 5
+
+SELECT email, SUM(num_cupcakes)
+FROM customers
+JOIN orders ON customer_id = customers.id
+GROUP BY email
+ORDER BY sum DESC;
