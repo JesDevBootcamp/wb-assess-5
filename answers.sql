@@ -20,3 +20,11 @@ WHERE customer_id IN (
 SELECT SUM(num_cupcakes)
 FROM orders
 WHERE NOT processed;
+
+-- Problem 4
+
+SELECT name, SUM(num_cupcakes)
+FROM cupcakes
+LEFT JOIN orders ON cupcake_id = cupcakes.id
+GROUP BY name
+ORDER BY name ASC;
