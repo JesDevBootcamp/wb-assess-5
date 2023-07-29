@@ -52,7 +52,7 @@ export async function printHumansAndAnimals() {
 	for (const person of people) {
 		directory.push(person.getFullName());
 
-		let pets = await person.getAnimals();
+		const pets = await person.getAnimals();
 
 		pets.forEach(pet => {
 			directory.push(`- ${pet.name}, ${pet.species}`);
@@ -64,4 +64,20 @@ export async function printHumansAndAnimals() {
 
 // Return a Set containing the full names of all humans
 // with animals of the given species.
-export async function getHumansByAnimalSpecies(species) {}
+export async function getHumansByAnimalSpecies(species) {
+	const humans = new Set();
+
+	const animals = await Animal.findAll({
+		where: { species }
+	});
+
+	for (const pet of animals) {
+		const person = await Human.findOne({
+			where: { humanId: pet.humanId }
+		});
+
+		humans.add(person.getFullName());
+	}
+
+	return humans;
+}
